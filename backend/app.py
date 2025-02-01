@@ -1,12 +1,14 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from database_setup import QueryProcessor  # Import the QueryProcessor class
+from database_setup import QueryProcessor
+import os
 
 app = Flask(__name__, static_folder="../frontend", template_folder="../frontend")
 CORS(app)
 
 # Instantiate the QueryProcessor (ensure correct db path)
 query_processor = QueryProcessor(db_path='data\company.db')
+#query_processor = NLPQueryProcessor(db_path='data\company.db')
 
 # Serve the main HTML page
 @app.route("/")
@@ -31,4 +33,5 @@ def ask():
     return jsonify({"answer": response})
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
+

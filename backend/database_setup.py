@@ -1,10 +1,13 @@
 import sqlite3
 import re
 from datetime import datetime
+from nlp_model import NLPProcessor
+
 
 class QueryProcessor:
     def __init__(self, db_path='data\company.db'):
         self.db_path = db_path
+        self.nlp= NLPProcessor()
     
     def _get_connection(self):
         """Create a new database connection."""
@@ -13,34 +16,29 @@ class QueryProcessor:
         return conn
     
     def process_query(self, query):
-        # Normalize the query
-        query = query.lower().strip()
+        """Use NLP to classify the query before passing it to the rule-based SQL model."""
+        query_type, error = self.nlp.classify_query(query)
         
-        try:
-            # Match different query patterns
-            if 'employees in the' in query:
-                return self._employees_in_department(query)
-            
-            elif 'manager of the' in query:
-                return self._get_department_manager(query)
-            
-            elif 'hired after' in query:
-                return self._employees_hired_after(query)
-            
-            elif 'total salary expense' in query:
-                return self._total_salary_expense(query)
-            
-            elif 'all employees' in query:
-                return self._list_all_employees()
-            
-            elif 'all departments' in query:
-                return self._list_all_departments()
-            
-            else:
-                return "Sorry, I couldn't understand your query. Could you rephrase?"
+        if error:
+            return error  # Return message if the query is unclear
         
-        except Exception as e:
-            return f"An error occurred: {str(e)}"
+        if query_type == "employees_in_department":
+            return self._employees_in_department(query)
+        elif query_type == "department_manager":
+            return self._get_department_manager(query)
+        elif query_type == "hired_after":
+            return self._employees_hired_after(query)
+        elif query_type == "salary_expense":
+            return self._total_salary_expense(query)
+        elif query_type == "all_employees":
+            return self._list_all_employees()
+        elif query_type == "all_departments":
+            return self._list_all_departments()
+        else:
+            return "Sorry, I couldn't match your query with known types."
+        
+        #except Exception as e:
+            #return f"An error occurred: {str(e)}"
     
     def _employees_in_department(self, query):
         # Extract department name

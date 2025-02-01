@@ -4,7 +4,7 @@ function sendMessage() {
     if (message === '') return;
 
     let chatBox = document.getElementById('chat-box');
-    chatBox.innerHTML += `<p><strong>You:</strong> ${message}</p>`;
+    chatBox.innerHTML += `<div class="message user-message"><strong>You:</strong> ${message}</div>`;
 
     fetch('http://127.0.0.1:5000/ask', {
         method: 'POST',
@@ -14,10 +14,13 @@ function sendMessage() {
     .then(response => response.json())
     .then(data => {
         console.log("Bot response:", data.answer);
-        chatBox.innerHTML += `<p><strong>Bot:</strong></p>`;
-        chatBox.innerHTML += data.answer;  // Render the HTML response
+        chatBox.innerHTML += `<div class="message bot-message"><strong>Bot:</strong> ${data.answer}</div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
     });
 
     inputField.value = '';
+}
+
+function fillInput(element) {
+    document.getElementById('user-input').value = element.textContent;
 }

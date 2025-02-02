@@ -21,12 +21,22 @@ This project is a web-based chatbot application designed to process natural lang
 - **Frontend**: HTML, CSS, and JavaScript for the chat interface
 - **CORS**: Allows cross-origin requests between the frontend and backend
 
-## Features  
+## Features
 
-- **Natural Language Processing (NLP)**: Converts user queries into SQL-like queries to fetch data from the database.
-- **Department-Based Queries**: The chatbot can return data for specific departments (e.g., Finance, IT).
-- **Employee Data**: Retrieve information such as employee name, department, salary, and hire date.
-- **Error Handling**: The system gracefully handles invalid queries and provides suggestions for rephrasing.
+- **Natural Language Query Processing**: Users can interact with the database using natural language queries, making the interface intuitive and user-friendly.
+- **SQLite Database Interaction**: The assistant connects to an SQLite database to process and retrieve data.
+- **Flask Web Framework**: Built with Flask for simple and lightweight web service deployment.
+- **Real-time Query Results**: The assistant fetches data from the database in real-time based on user input.
+- **Interactive Chat Interface**: Allows seamless interaction with the application via a chat-based interface.
+- **Instructions for Users**: The app provides user-friendly instructions to guide users in formulating their queries.
+- **Error Handling**: Basic error handling to ensure the system responds appropriately to invalid queries or system failures.
+
+## Limitations
+
+- **Limited Query Scope**: Currently, the assistant only handles basic SQL queries and may not support complex query generation.
+- **Dependence on SQLite**: The app is tied to SQLite for database interaction, limiting scalability for larger datasets or high-concurrency environments.
+- **Basic Natural Language Processing (NLP)**: The NLP component is rudimentary, and more advanced features like query intent recognition or semantic analysis are not yet implemented.
+- **Error-Prone Query Handling**: The system might struggle with handling certain complex or ambiguous queries, especially when the user input is not directly mapped to a valid SQL query.
 
 
 ## Run Locally  

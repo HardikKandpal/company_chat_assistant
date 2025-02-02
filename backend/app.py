@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
-from database_setup import QueryProcessor
+from backend.database_setup import QueryProcessor
 import os
 import spacy
 

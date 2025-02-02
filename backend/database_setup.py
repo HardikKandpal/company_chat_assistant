@@ -1,7 +1,7 @@
 import sqlite3
 import re
 from datetime import datetime
-from nlp_model import NLPProcessor
+from backend.nlp_model import NLPProcessor
 
 
 class QueryProcessor:

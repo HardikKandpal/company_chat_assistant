@@ -9,9 +9,9 @@ This project is a web-based chatbot application designed to process natural lang
 
 ## Screenshots  
 
-Screenshot 2025-02-02 120621.png
+![Screenshot 2025-02-02 120621](https://github.com/user-attachments/assets/e263b0a9-3848-4511-b9f9-425007fa1bdc)
 
-Screenshot 2025-02-02 120710.png
+![Screenshot 2025-02-02 120710](https://github.com/user-attachments/assets/3966784b-e8c4-49bc-9e39-3d21200c8447)
 
 ## Tech Stack  
 

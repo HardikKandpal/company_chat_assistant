@@ -2,12 +2,21 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from database_setup import QueryProcessor
 import os
+import spacy
+
+try:
+    spacy.load("en_core_web_sm")
+except OSError:
+    print("Downloading the en_core_web_sm model...")
+    import os
+    os.system("python -m spacy download en_core_web_sm")
+    spacy.load("en_core_web_sm")
 
 app = Flask(__name__, static_folder="../frontend", template_folder="../frontend")
 CORS(app)
 
 # Instantiate the QueryProcessor (ensure correct db path)
-query_processor = QueryProcessor(db_path='data\company.db')
+query_processor = QueryProcessor(db_path='data/company.db')
 #query_processor = NLPQueryProcessor(db_path='data\company.db')
 
 # Serve the main HTML page
